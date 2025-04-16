@@ -1,94 +1,85 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
-
-import sharp from 'sharp' // sharp-import
+import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig, PayloadRequest } from 'payload'
+import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
+import sharp from 'sharp'
 
-import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
-import { plugins } from './plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from './utilities/getURL'
+import { Media } from './collections/Media'
+
+import { Achievements } from './collections/Achievments'
+import { AfterQuestionInformations } from './collections/AfterQuestionInformations'
+import { Comments } from './collections/comments'
+import { EmailVerifications } from './collections/EmailVerifications'
+import { InformationSlides } from './collections/InformationSlides'
+import { MediaLinks } from './collections/MediaLinks'
+import { PasswordResets } from './collections/PasswordResets'
+import { Posts } from './collections/Posts'
+import { PuzzleGames } from './collections/PuzzleGames'
+import { PuzzlePieces } from './collections/PuzzlePieces'
+import { QuizGames } from './collections/QuizGames'
+import { QuizGameQuestions } from './collections/QuizGameQuestions'
+import { RefreshTokens } from './collections/RefreshTokens'
+import { Regions } from './collections/Regions'
+import { Tags } from './collections/Tags'
+import { TreasureCards } from './collections/TreasureCards'
+import { TreasureGames } from './collections/TreasureGames'
+import { WordGames } from './collections/WordGames'
+import { CommentReactions } from './collections/CommentReactions'
+import { GameTypes } from './collections/GameTypes'
+import { User } from './collections/User'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    components: {
-      // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
-      beforeLogin: ['@/components/BeforeLogin'],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      beforeDashboard: ['@/components/BeforeDashboard'],
-    },
+    user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    user: Users.slug,
-    livePreview: {
-      breakpoints: [
-        {
-          label: 'Mobile',
-          name: 'mobile',
-          width: 375,
-          height: 667,
-        },
-        {
-          label: 'Tablet',
-          name: 'tablet',
-          width: 768,
-          height: 1024,
-        },
-        {
-          label: 'Desktop',
-          name: 'desktop',
-          width: 1440,
-          height: 900,
-        },
-      ],
-    },
   },
-  // This config helps us configure global or default features that the other editors can inherit
-  editor: defaultLexical,
+  collections: [
+    Users,
+    Media,
+    Achievements,
+    AfterQuestionInformations,
+    Comments,
+    EmailVerifications,
+    InformationSlides,
+    MediaLinks,
+    PasswordResets,
+    Posts,
+    PuzzleGames,
+    PuzzlePieces,
+    QuizGames,
+    QuizGameQuestions,
+    RefreshTokens,
+    Regions,
+    Tags,
+    TreasureCards,
+    TreasureGames,
+    WordGames,
+    CommentReactions,
+    GameTypes,
+    User,
+  ],
+  editor: lexicalEditor(),
+  secret: process.env.PAYLOAD_SECRET || '',
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
-  cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  sharp,
   plugins: [
-    ...plugins,
+    payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
-  secret: process.env.PAYLOAD_SECRET,
-  sharp,
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
-  jobs: {
-    access: {
-      run: ({ req }: { req: PayloadRequest }): boolean => {
-        // Allow logged in users to execute this endpoint (default)
-        if (req.user) return true
-
-        // If there is no logged in user, then check
-        // for the Vercel Cron secret to be present as an
-        // Authorization header:
-        const authHeader = req.headers.get('authorization')
-        return authHeader === `Bearer ${process.env.CRON_SECRET}`
-      },
-    },
-    tasks: [],
-  },
 })
