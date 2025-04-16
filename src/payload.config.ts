@@ -12,7 +12,7 @@ import { Media } from './collections/Media'
 
 import { Achievements } from './collections/Achievments'
 import { AfterQuestionInformations } from './collections/AfterQuestionInformations'
-import { Comments } from './collections/comments'
+import { Comments } from './collections/Comments'
 import { EmailVerifications } from './collections/EmailVerifications'
 import { InformationSlides } from './collections/InformationSlides'
 import { MediaLinks } from './collections/MediaLinks'
