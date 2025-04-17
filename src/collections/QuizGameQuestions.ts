@@ -9,6 +9,7 @@ export const QuizGameQuestions: CollectionConfig = {
     { name: 'optionB', type: 'text' },
     { name: 'optionC', type: 'text' },
     { name: 'optionD', type: 'text' },
+    { name: 'audioUrl', type: 'text' },
     { name: 'correctAnswer', type: 'text' },
   ],
 }

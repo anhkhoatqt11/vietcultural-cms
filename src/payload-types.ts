@@ -487,6 +487,7 @@ export interface QuizGameQuestion {
   optionB?: string | null;
   optionC?: string | null;
   optionD?: string | null;
+  audioUrl?: string | null;
   correctAnswer?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -869,6 +870,7 @@ export interface QuizGameQuestionsSelect<T extends boolean = true> {
   optionB?: T;
   optionC?: T;
   optionD?: T;
+  audioUrl?: T;
   correctAnswer?: T;
   updatedAt?: T;
   createdAt?: T;

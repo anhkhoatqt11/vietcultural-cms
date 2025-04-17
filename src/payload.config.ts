@@ -31,6 +31,7 @@ import { WordGames } from './collections/WordGames'
 import { CommentReactions } from './collections/CommentReactions'
 import { GameTypes } from './collections/GameTypes'
 import { User } from './collections/User'
+import {uploadthingStorage} from '@payloadcms/storage-uploadthing'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -80,6 +81,14 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    // storage-adapter-placeholder
+    uploadthingStorage({
+      collections: {
+      },
+      options: {
+        token: process.env.UPLOADTHING_TOKEN,
+        acl: 'public-read',
+      },
+    }),
   ],
 })
+

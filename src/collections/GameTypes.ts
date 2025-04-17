@@ -8,6 +8,7 @@ export const GameTypes: CollectionConfig = {
       type: 'select',
       options: ['puzzle', 'quiz', 'word', 'treasure'],
       required: true,
+      unique: true,
     },
     {
       name: 'name',
