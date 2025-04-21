@@ -11,4 +11,10 @@ export const AfterQuestionInformations: CollectionConfig = {
     { name: 'wordGameId', type: 'relationship', relationTo: 'word-games' },
     { name: 'gameTypeId', type: 'relationship', relationTo: 'game-types' },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

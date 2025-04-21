@@ -15,4 +15,10 @@ export const MediaLinks: CollectionConfig = {
     { name: 'alt', type: 'text' },
     { name: 'afterQuestionInfoId', type: 'relationship', relationTo: 'after-question-info' },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

@@ -52,4 +52,10 @@ export const User: CollectionConfig = {
       defaultValue: false,
     },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

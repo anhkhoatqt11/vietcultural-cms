@@ -17,4 +17,10 @@ export const Posts: CollectionConfig = {
       // If you are migrating from integer IDs, update your DB column type to text or uuid
     },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

@@ -7,4 +7,10 @@ export const InformationSlides: CollectionConfig = {
     { name: 'content', type: 'array', fields: [{ name: 'paragraph', type: 'text' }] },
     { name: 'afterQuestionInfoId', type: 'relationship', relationTo: 'after-question-info' },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

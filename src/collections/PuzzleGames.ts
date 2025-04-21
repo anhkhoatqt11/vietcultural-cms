@@ -14,4 +14,10 @@ export const PuzzleGames: CollectionConfig = {
     },    
     { name: 'answer', type: 'array', fields: [{ name: 'index', type: 'number' }] },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

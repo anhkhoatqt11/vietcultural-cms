@@ -10,4 +10,10 @@ export const Comments: CollectionConfig = {
     { name: 'dislikes', type: 'number', defaultValue: 0 },
     { name: 'parentId', type: 'relationship', relationTo: 'comments' },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

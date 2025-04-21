@@ -9,4 +9,10 @@ export const Achievements: CollectionConfig = {
     { name: 'description', type: 'text', required: true },
     { name: 'stars', type: 'number', required: true },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

@@ -12,4 +12,10 @@ export const PuzzlePieces: CollectionConfig = {
       required: true,
     },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

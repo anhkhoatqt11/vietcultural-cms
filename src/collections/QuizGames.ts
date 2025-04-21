@@ -8,4 +8,10 @@ export const QuizGames: CollectionConfig = {
     { name: 'title', type: 'text' },
     { name: 'description', type: 'textarea' },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

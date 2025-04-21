@@ -12,4 +12,10 @@ export const QuizGameQuestions: CollectionConfig = {
     { name: 'audioUrl', type: 'text' },
     { name: 'correctAnswer', type: 'text' },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

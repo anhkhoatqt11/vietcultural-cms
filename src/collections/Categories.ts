@@ -23,4 +23,10 @@ export const Categories: CollectionConfig = {
     },
     ...slugField(),
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }

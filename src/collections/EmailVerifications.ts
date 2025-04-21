@@ -7,4 +7,10 @@ export const EmailVerifications: CollectionConfig = {
     { name: 'otp', type: 'text' },
     { name: 'expiresAt', type: 'date' },
   ],
+  access:{
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  }
 }
