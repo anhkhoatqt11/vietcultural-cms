@@ -275,7 +275,14 @@ export interface PuzzleGame {
   id: number;
   regionid?: (number | null) | Region;
   gametype?: (number | null) | GameType;
-  imageurl?: string | null;
+  hint?: string | null;
+  image: number | Media;
+  answer?:
+    | {
+        index?: number | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -455,10 +462,6 @@ export interface PuzzlePiece {
   id: number;
   puzzleid?: (number | null) | PuzzleGame;
   piece_index?: number | null;
-  x_position?: number | null;
-  y_position?: number | null;
-  correct_x?: number | null;
-  correct_y?: number | null;
   image_piece: number | Media;
   updatedAt: string;
   createdAt: string;
@@ -822,7 +825,14 @@ export interface PostsSelect<T extends boolean = true> {
 export interface PuzzleGamesSelect<T extends boolean = true> {
   regionid?: T;
   gametype?: T;
-  imageurl?: T;
+  hint?: T;
+  image?: T;
+  answer?:
+    | T
+    | {
+        index?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -833,10 +843,6 @@ export interface PuzzleGamesSelect<T extends boolean = true> {
 export interface PuzzlePiecesSelect<T extends boolean = true> {
   puzzleid?: T;
   piece_index?: T;
-  x_position?: T;
-  y_position?: T;
-  correct_x?: T;
-  correct_y?: T;
   image_piece?: T;
   updatedAt?: T;
   createdAt?: T;

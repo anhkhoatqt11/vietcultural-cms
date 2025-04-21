@@ -5,6 +5,13 @@ export const PuzzleGames: CollectionConfig = {
   fields: [
     { name: 'regionid', type: 'relationship', relationTo: 'regions' },
     { name: 'gametype', type: 'relationship', relationTo: 'game-types' },
-    { name: 'imageurl', type: 'text' },
+    { name: 'hint', type: 'text' },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media', // Change if your media collection slug is different
+      required: true,
+    },    
+    { name: 'answer', type: 'array', fields: [{ name: 'index', type: 'number' }] },
   ],
 }
