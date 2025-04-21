@@ -38,21 +38,19 @@ export async function generateStaticParams() {
 }
 
 type Args = {
-  params: Promise<{
+  params: {
     slug?: string
-  }>
+  }
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
+export default async function Page({ params }: Args) {
   const { isEnabled: draft } = await draftMode()
-  const { slug = 'home' } = await paramsPromise
+  const { slug = 'home' } = params
   const url = '/' + slug
 
   let page: RequiredDataFromCollectionSlug<'pages'> | null
 
-  page = await queryPageBySlug({
-    slug,
-  })
+  page = await queryPageBySlug({ slug })
 
   // Remove this code once your website is seeded
   if (!page && slug === 'home') {
@@ -79,11 +77,9 @@ export default async function Page({ params: paramsPromise }: Args) {
   )
 }
 
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = 'home' } = await paramsPromise
-  const page = await queryPageBySlug({
-    slug,
-  })
+export async function generateMetadata({ params }: Args): Promise<Metadata> {
+  const { slug = 'home' } = params
+  const page = await queryPageBySlug({ slug })
 
   return generateMeta({ doc: page })
 }
