@@ -19,6 +19,18 @@ export const TreasureCards: CollectionConfig = {
       name: 'value',
       type: 'text',
       required: true,
+      admin: {
+        condition: (data) => data?.type === 'text',
+      },
+    },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media', // Change to your media collection slug if different
+      required: true,
+      admin: {
+        condition: (data) => data?.type === 'image',
+      },
     },
     {
       name: 'matchGroup',

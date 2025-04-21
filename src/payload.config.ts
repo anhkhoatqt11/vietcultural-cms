@@ -83,10 +83,10 @@ export default buildConfig({
     payloadCloudPlugin(),
     uploadthingStorage({
       collections: {
+        media: true,
       },
       options: {
-        token: process.env.UPLOADTHING_TOKEN,
-        acl: 'public-read',
+        token: process.env.UPLOADTHING_TOKEN || '',
       },
     }),
   ],

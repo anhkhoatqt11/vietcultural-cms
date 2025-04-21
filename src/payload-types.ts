@@ -202,6 +202,7 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  _key?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -378,16 +379,8 @@ export interface Post {
   userId?: (number | null) | User1;
   title?: string | null;
   question?: string | null;
-  media?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
   tags?: (number | Tag)[] | null;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -436,12 +429,7 @@ export interface InformationSlide {
  */
 export interface MediaLink {
   id: number;
-  src?:
-    | {
-        url?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  images: (number | Media)[];
   alt?: string | null;
   afterQuestionInfoId?: (number | null) | AfterQuestionInfo;
   updatedAt: string;
@@ -471,9 +459,18 @@ export interface PuzzlePiece {
   y_position?: number | null;
   correct_x?: number | null;
   correct_y?: number | null;
-  image_piece_url?: string | null;
+  image_piece: number | Media;
   updatedAt: string;
   createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -513,7 +510,8 @@ export interface TreasureCard {
   id: number;
   treasureGame: number | TreasureGame;
   type: 'text' | 'image';
-  value: string;
+  value?: string | null;
+  image?: (number | null) | Media;
   matchGroup: number;
   updatedAt: string;
   createdAt: string;
@@ -702,6 +700,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  _key?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -786,12 +785,7 @@ export interface InformationSlidesSelect<T extends boolean = true> {
  * via the `definition` "media-links_select".
  */
 export interface MediaLinksSelect<T extends boolean = true> {
-  src?:
-    | T
-    | {
-        url?: T;
-        id?: T;
-      };
+  images?: T;
   alt?: T;
   afterQuestionInfoId?: T;
   updatedAt?: T;
@@ -816,8 +810,8 @@ export interface PostsSelect<T extends boolean = true> {
   userId?: T;
   title?: T;
   question?: T;
-  media?: T;
   tags?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -843,9 +837,18 @@ export interface PuzzlePiecesSelect<T extends boolean = true> {
   y_position?: T;
   correct_x?: T;
   correct_y?: T;
-  image_piece_url?: T;
+  image_piece?: T;
   updatedAt?: T;
   createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -916,6 +919,7 @@ export interface TreasureCardsSelect<T extends boolean = true> {
   treasureGame?: T;
   type?: T;
   value?: T;
+  image?: T;
   matchGroup?: T;
   updatedAt?: T;
   createdAt?: T;

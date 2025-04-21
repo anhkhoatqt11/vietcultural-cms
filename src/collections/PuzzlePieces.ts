@@ -9,6 +9,12 @@ export const PuzzlePieces: CollectionConfig = {
     { name: 'y_position', type: 'number' },
     { name: 'correct_x', type: 'number' },
     { name: 'correct_y', type: 'number' },
-    { name: 'image_piece_url', type: 'text' },
+    {
+      name: 'image_piece',
+      type: 'upload',
+      relationTo: 'media', // Change if your media collection slug is different
+      required: true,
+    },
   ],
+  upload: true,
 }

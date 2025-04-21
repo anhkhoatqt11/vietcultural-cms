@@ -7,7 +7,14 @@ export const Posts: CollectionConfig = {
     { name: 'userId', type: 'relationship', relationTo: 'user' },
     { name: 'title', type: 'text' },
     { name: 'question', type: 'textarea' },
-    { name: 'media', type: 'json' },
     { name: 'tags', type: 'relationship', relationTo: 'tags', hasMany: true },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media', // assumes you have a 'media' collection for uploads
+      required: false,
+      // If your media collection uses UUIDs or strings as IDs, ensure your DB column matches
+      // If you are migrating from integer IDs, update your DB column type to text or uuid
+    },
   ],
 }
