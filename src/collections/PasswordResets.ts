@@ -10,7 +10,7 @@ export const PasswordResets: CollectionConfig = {
       required: true,
     },
     {
-      name: 'token',
+      name: 'otp',
       type: 'text',
       required: true,
       unique: true,

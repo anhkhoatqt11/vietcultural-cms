@@ -454,7 +454,7 @@ export interface MediaLink {
 export interface PasswordReset {
   id: number;
   userId: number | User1;
-  token: string;
+  otp: string;
   expiresAt: string;
   updatedAt: string;
   createdAt: string;
@@ -803,7 +803,7 @@ export interface MediaLinksSelect<T extends boolean = true> {
  */
 export interface PasswordResetsSelect<T extends boolean = true> {
   userId?: T;
-  token?: T;
+  otp?: T;
   expiresAt?: T;
   updatedAt?: T;
   createdAt?: T;
