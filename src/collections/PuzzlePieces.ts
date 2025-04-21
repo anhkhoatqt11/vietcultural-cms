@@ -12,5 +12,4 @@ export const PuzzlePieces: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
 }
