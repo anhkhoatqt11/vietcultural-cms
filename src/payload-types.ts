@@ -404,6 +404,7 @@ export interface Post {
   title?: string | null;
   question?: string | null;
   tags?: (number | Tag)[] | null;
+  likes?: number | null;
   image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
@@ -805,6 +806,7 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   question?: T;
   tags?: T;
+  likes?: T;
   image?: T;
   updatedAt?: T;
   createdAt?: T;
