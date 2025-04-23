@@ -259,43 +259,28 @@ export interface User1 {
 export interface AfterQuestionInfo {
   id: number;
   topicName: string;
-  puzzleGameId?: (number | null) | PuzzleGame;
+  gameType: 'puzzle' | 'quiz' | 'treasure' | 'word';
+  gameTypeId?: (number | null) | GameType;
   quizGameId?: (number | null) | QuizGame;
+  quizGameQuestionId?: (number | null) | QuizGameQuestion;
+  puzzleGameId?: (number | null) | PuzzleGame;
   treasureGameId?: (number | null) | TreasureGame;
   wordGameId?: (number | null) | WordGame;
-  gameTypeId?: (number | null) | GameType;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "puzzle-games".
- */
-export interface PuzzleGame {
-  id: number;
-  regionid?: (number | null) | Region;
-  gametype?: (number | null) | GameType;
-  hint?: string | null;
-  image: number | Media;
-  answer?:
-    | {
-        index?: number | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "regions".
- */
-export interface Region {
-  id: number;
-  regionName: string;
-  regionCode: string;
-  mediaUrl?: string | null;
-  description?: string | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -320,6 +305,55 @@ export interface QuizGame {
   gametype?: (number | null) | GameType;
   title?: string | null;
   description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions".
+ */
+export interface Region {
+  id: number;
+  regionName: string;
+  regionCode: string;
+  mediaUrl?: string | null;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quiz-game-questions".
+ */
+export interface QuizGameQuestion {
+  id: number;
+  quiz_game_id?: (number | null) | QuizGame;
+  question?: string | null;
+  optionA?: string | null;
+  optionB?: string | null;
+  optionC?: string | null;
+  optionD?: string | null;
+  audioUrl?: string | null;
+  correctAnswer?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "puzzle-games".
+ */
+export interface PuzzleGame {
+  id: number;
+  regionid?: (number | null) | Region;
+  gametype?: (number | null) | GameType;
+  hint?: string | null;
+  image: number | Media;
+  answer?:
+    | {
+        index?: number | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -463,23 +497,6 @@ export interface PuzzlePiece {
   puzzleid?: (number | null) | PuzzleGame;
   piece_index?: number | null;
   image_piece: number | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "quiz-game-questions".
- */
-export interface QuizGameQuestion {
-  id: number;
-  quiz_game_id?: (number | null) | QuizGame;
-  question?: string | null;
-  optionA?: string | null;
-  optionB?: string | null;
-  optionC?: string | null;
-  optionD?: string | null;
-  audioUrl?: string | null;
-  correctAnswer?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -725,11 +742,14 @@ export interface AchievementsSelect<T extends boolean = true> {
  */
 export interface AfterQuestionInfoSelect<T extends boolean = true> {
   topicName?: T;
-  puzzleGameId?: T;
+  gameType?: T;
+  gameTypeId?: T;
   quizGameId?: T;
+  quizGameQuestionId?: T;
+  puzzleGameId?: T;
   treasureGameId?: T;
   wordGameId?: T;
-  gameTypeId?: T;
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
 }
