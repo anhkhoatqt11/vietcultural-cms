@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 
 export const Comments: CollectionConfig = {
   slug: 'comments',
+  admin: { useAsTitle: 'content' },
   fields: [
     { name: 'postId', type: 'relationship', relationTo: 'posts' },
     { name: 'userId', type: 'relationship', relationTo: 'user' },

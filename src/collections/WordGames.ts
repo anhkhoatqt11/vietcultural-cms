@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 
 export const WordGames: CollectionConfig = {
   slug: 'word-games',
+  admin: { useAsTitle: 'question' },
   fields: [
     {
       name: 'region',

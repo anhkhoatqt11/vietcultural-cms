@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 
 export const QuizGameQuestions: CollectionConfig = {
   slug: 'quiz-game-questions',
+  admin: { useAsTitle: 'question' },
   fields: [
     { name: 'quiz_game_id', type: 'relationship', relationTo: 'quiz-games' },
     { name: 'question', type: 'text' },

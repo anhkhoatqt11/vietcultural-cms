@@ -28,9 +28,16 @@ export async function generateStaticParams() {
     },
   })
 
-  const params = posts.docs.map(({ slug }) => {
-    return { slug }
+  // Optional: log invalid slugs during build for debugging
+  posts.docs.forEach((post) => {
+    if (typeof post.slug !== 'string' || post.slug.trim() === '') {
+      console.warn('Invalid slug in post:', post)
+    }
   })
+
+  const params = posts.docs
+    .filter(({ slug }) => typeof slug === 'string' && slug.trim() !== '')
+    .map(({ slug }) => ({ slug }))
 
   return params
 }

@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 
 export const PuzzleGames: CollectionConfig = {
   slug: 'puzzle-games',
+  admin: { useAsTitle: 'hint' },
   fields: [
     { name: 'regionid', type: 'relationship', relationTo: 'regions' },
     { name: 'gametype', type: 'relationship', relationTo: 'game-types' },

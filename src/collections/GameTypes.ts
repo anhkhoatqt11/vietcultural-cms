@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 
 export const GameTypes: CollectionConfig = {
   slug: 'game-types',
+  admin: { useAsTitle: 'code' },
   fields: [
     {
       name: 'code',

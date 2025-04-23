@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 
 export const TreasureGames: CollectionConfig = {
   slug: 'treasure-games',
+  admin: { useAsTitle: 'title' },
   fields: [
     {
       name: 'region',
