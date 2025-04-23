@@ -91,6 +91,7 @@ export interface Config {
     'comment-reactions': CommentReaction;
     'game-types': GameType;
     user: User1;
+    'play-process': PlayProcess;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -120,6 +121,7 @@ export interface Config {
     'comment-reactions': CommentReactionsSelect<false> | CommentReactionsSelect<true>;
     'game-types': GameTypesSelect<false> | GameTypesSelect<true>;
     user: UserSelect<false> | UserSelect<true>;
+    'play-process': PlayProcessSelect<false> | PlayProcessSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -525,6 +527,22 @@ export interface CommentReaction {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "play-process".
+ */
+export interface PlayProcess {
+  id: number;
+  achievementId?: (number | null) | Achievement;
+  userId?: (number | null) | User1;
+  history?: boolean | null;
+  intangible_heritage?: boolean | null;
+  tangible_heritage?: boolean | null;
+  stars?: number | null;
+  badge?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -621,6 +639,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'user';
         value: number | User1;
+      } | null)
+    | ({
+        relationTo: 'play-process';
+        value: number | PlayProcess;
       } | null);
   globalSlug?: string | null;
   user:
@@ -994,6 +1016,21 @@ export interface UserSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "play-process_select".
+ */
+export interface PlayProcessSelect<T extends boolean = true> {
+  achievementId?: T;
+  userId?: T;
+  history?: T;
+  intangible_heritage?: T;
+  tangible_heritage?: T;
+  stars?: T;
+  badge?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
