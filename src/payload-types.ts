@@ -260,7 +260,7 @@ export interface AfterQuestionInfo {
   id: number;
   topicName: string;
   puzzleGameId?: (number | null) | PuzzleGame;
-  quizGameId?: (number | null) | QuizGame;
+  quizGameQuestionId?: (number | null) | QuizGameQuestion;
   treasureGameId?: (number | null) | TreasureGame;
   wordGameId?: (number | null) | WordGame;
   gameTypeId?: (number | null) | GameType;
@@ -307,6 +307,23 @@ export interface GameType {
   id: number;
   code: 'puzzle' | 'quiz' | 'word' | 'treasure';
   name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quiz-game-questions".
+ */
+export interface QuizGameQuestion {
+  id: number;
+  quiz_game_id?: (number | null) | QuizGame;
+  question?: string | null;
+  optionA?: string | null;
+  optionB?: string | null;
+  optionC?: string | null;
+  optionD?: string | null;
+  audioUrl?: string | null;
+  correctAnswer?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -463,23 +480,6 @@ export interface PuzzlePiece {
   puzzleid?: (number | null) | PuzzleGame;
   piece_index?: number | null;
   image_piece: number | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "quiz-game-questions".
- */
-export interface QuizGameQuestion {
-  id: number;
-  quiz_game_id?: (number | null) | QuizGame;
-  question?: string | null;
-  optionA?: string | null;
-  optionB?: string | null;
-  optionC?: string | null;
-  optionD?: string | null;
-  audioUrl?: string | null;
-  correctAnswer?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -726,7 +726,7 @@ export interface AchievementsSelect<T extends boolean = true> {
 export interface AfterQuestionInfoSelect<T extends boolean = true> {
   topicName?: T;
   puzzleGameId?: T;
-  quizGameId?: T;
+  quizGameQuestionId?: T;
   treasureGameId?: T;
   wordGameId?: T;
   gameTypeId?: T;
