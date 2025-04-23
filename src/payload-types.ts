@@ -259,52 +259,30 @@ export interface User1 {
 export interface AfterQuestionInfo {
   id: number;
   topicName: string;
-  gameType: 'puzzle' | 'quiz' | 'treasure' | 'word';
-  gameTypeId?: (number | null) | GameType;
-  quizGameId?: (number | null) | QuizGame;
-  quizGameQuestionId?: (number | null) | QuizGameQuestion;
   puzzleGameId?: (number | null) | PuzzleGame;
+  quizGameQuestionId?: (number | null) | QuizGameQuestion;
   treasureGameId?: (number | null) | TreasureGame;
   wordGameId?: (number | null) | WordGame;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  gameTypeId?: (number | null) | GameType;
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "game-types".
+ * via the `definition` "puzzle-games".
  */
-export interface GameType {
-  id: number;
-  code: 'puzzle' | 'quiz' | 'word' | 'treasure';
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "quiz-games".
- */
-export interface QuizGame {
+export interface PuzzleGame {
   id: number;
   regionid?: (number | null) | Region;
   gametype?: (number | null) | GameType;
-  title?: string | null;
-  description?: string | null;
+  hint?: string | null;
+  image: number | Media;
+  answer?:
+    | {
+        index?: number | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -318,6 +296,17 @@ export interface Region {
   regionCode: string;
   mediaUrl?: string | null;
   description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "game-types".
+ */
+export interface GameType {
+  id: number;
+  code: 'puzzle' | 'quiz' | 'word' | 'treasure';
+  name: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -340,20 +329,14 @@ export interface QuizGameQuestion {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "puzzle-games".
+ * via the `definition` "quiz-games".
  */
-export interface PuzzleGame {
+export interface QuizGame {
   id: number;
   regionid?: (number | null) | Region;
   gametype?: (number | null) | GameType;
-  hint?: string | null;
-  image: number | Media;
-  answer?:
-    | {
-        index?: number | null;
-        id?: string | null;
-      }[]
-    | null;
+  title?: string | null;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -742,14 +725,11 @@ export interface AchievementsSelect<T extends boolean = true> {
  */
 export interface AfterQuestionInfoSelect<T extends boolean = true> {
   topicName?: T;
-  gameType?: T;
-  gameTypeId?: T;
-  quizGameId?: T;
-  quizGameQuestionId?: T;
   puzzleGameId?: T;
+  quizGameQuestionId?: T;
   treasureGameId?: T;
   wordGameId?: T;
-  content?: T;
+  gameTypeId?: T;
   updatedAt?: T;
   createdAt?: T;
 }
