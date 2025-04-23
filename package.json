@@ -15,7 +15,6 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
-    "@img/sharp-linux-x64": "^0.34.1",
     "@payloadcms/db-postgres": "3.33.0",
     "@payloadcms/live-preview-react": "3.33.0",
     "@payloadcms/next": "3.33.0",
