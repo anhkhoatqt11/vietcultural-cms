@@ -18,7 +18,7 @@ export const KnowledgePost: CollectionConfig = {
     },
     {
       name: 'content',
-      type: 'richText',
+      type: 'text',
     },
     {
       name: 'post_type',
