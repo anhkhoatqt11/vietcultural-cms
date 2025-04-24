@@ -8,7 +8,13 @@ export const Posts: CollectionConfig = {
     { name: 'title', type: 'text' },
     { name: 'question', type: 'textarea' },
     { name: 'tags', type: 'relationship', relationTo: 'tags', hasMany: true },
-    { name: 'likes', type: 'number', defaultValue: 0 },
+    {
+      name: 'likedBy',
+      type: 'relationship',
+      relationTo: 'user',
+      hasMany: true,
+      defaultValue: [],
+    },
     {
       name: 'image',
       type: 'upload',
