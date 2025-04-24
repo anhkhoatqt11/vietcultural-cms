@@ -91,6 +91,8 @@ export interface Config {
     'comment-reactions': CommentReaction;
     'game-types': GameType;
     user: User1;
+    'knowledge-post': KnowledgePost;
+    'play-process': PlayProcess;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -120,6 +122,8 @@ export interface Config {
     'comment-reactions': CommentReactionsSelect<false> | CommentReactionsSelect<true>;
     'game-types': GameTypesSelect<false> | GameTypesSelect<true>;
     user: UserSelect<false> | UserSelect<true>;
+    'knowledge-post': KnowledgePostSelect<false> | KnowledgePostSelect<true>;
+    'play-process': PlayProcessSelect<false> | PlayProcessSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -525,6 +529,50 @@ export interface CommentReaction {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-post".
+ */
+export interface KnowledgePost {
+  id: number;
+  subject?: string | null;
+  title?: string | null;
+  image?: (number | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  post_type: 'region' | 'province' | 'journey' | 'category';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "play-process".
+ */
+export interface PlayProcess {
+  id: number;
+  achievementId?: (number | null) | Achievement;
+  userId?: (number | null) | User1;
+  history?: boolean | null;
+  intangible_heritage?: boolean | null;
+  tangible_heritage?: boolean | null;
+  stars?: number | null;
+  badge?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -621,6 +669,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'user';
         value: number | User1;
+      } | null)
+    | ({
+        relationTo: 'knowledge-post';
+        value: number | KnowledgePost;
+      } | null)
+    | ({
+        relationTo: 'play-process';
+        value: number | PlayProcess;
       } | null);
   globalSlug?: string | null;
   user:
@@ -994,6 +1050,34 @@ export interface UserSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-post_select".
+ */
+export interface KnowledgePostSelect<T extends boolean = true> {
+  subject?: T;
+  title?: T;
+  image?: T;
+  content?: T;
+  post_type?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "play-process_select".
+ */
+export interface PlayProcessSelect<T extends boolean = true> {
+  achievementId?: T;
+  userId?: T;
+  history?: T;
+  intangible_heritage?: T;
+  tangible_heritage?: T;
+  stars?: T;
+  badge?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
