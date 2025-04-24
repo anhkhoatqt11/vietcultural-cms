@@ -31,7 +31,9 @@ import { WordGames } from './collections/WordGames'
 import { CommentReactions } from './collections/CommentReactions'
 import { GameTypes } from './collections/GameTypes'
 import { User } from './collections/User'
-import {uploadthingStorage} from '@payloadcms/storage-uploadthing'
+import { KnowledgePost } from './collections/KnowledgePosts'
+import { PlayProcess } from './collections/PlayProcess'
+import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -67,6 +69,8 @@ export default buildConfig({
     CommentReactions,
     GameTypes,
     User,
+    KnowledgePost,
+    PlayProcess,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -91,4 +95,3 @@ export default buildConfig({
     }),
   ],
 })
-
