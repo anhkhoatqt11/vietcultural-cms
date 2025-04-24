@@ -265,7 +265,7 @@ export interface AfterQuestionInfo {
   topicName: string;
   puzzleGameId?: (number | null) | PuzzleGame;
   quizGameQuestionId?: (number | null) | QuizGameQuestion;
-  treasureGameId?: (number | null) | TreasureGame;
+  treasureCardId?: (number | null) | TreasureCard;
   wordGameId?: (number | null) | WordGame;
   gameTypeId?: (number | null) | GameType;
   updatedAt: string;
@@ -341,6 +341,20 @@ export interface QuizGame {
   gametype?: (number | null) | GameType;
   title?: string | null;
   description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "treasure-cards".
+ */
+export interface TreasureCard {
+  id: number;
+  treasureGame: number | TreasureGame;
+  type: 'text' | 'image';
+  value?: string | null;
+  image?: (number | null) | Media;
+  matchGroup: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -458,7 +472,8 @@ export interface InformationSlide {
  */
 export interface MediaLink {
   id: number;
-  images: (number | Media)[];
+  images?: (number | Media)[] | null;
+  youtubeLink?: string | null;
   alt?: string | null;
   afterQuestionInfoId?: (number | null) | AfterQuestionInfo;
   updatedAt: string;
@@ -500,20 +515,6 @@ export interface RefreshToken {
   createdAt: string;
   updatedAt: string;
   expireAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "treasure-cards".
- */
-export interface TreasureCard {
-  id: number;
-  treasureGame: number | TreasureGame;
-  type: 'text' | 'image';
-  value?: string | null;
-  image?: (number | null) | Media;
-  matchGroup: number;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -770,7 +771,7 @@ export interface AfterQuestionInfoSelect<T extends boolean = true> {
   topicName?: T;
   puzzleGameId?: T;
   quizGameQuestionId?: T;
-  treasureGameId?: T;
+  treasureCardId?: T;
   wordGameId?: T;
   gameTypeId?: T;
   updatedAt?: T;
@@ -823,6 +824,7 @@ export interface InformationSlidesSelect<T extends boolean = true> {
  */
 export interface MediaLinksSelect<T extends boolean = true> {
   images?: T;
+  youtubeLink?: T;
   alt?: T;
   afterQuestionInfoId?: T;
   updatedAt?: T;

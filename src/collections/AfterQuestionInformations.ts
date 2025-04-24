@@ -7,7 +7,7 @@ export const AfterQuestionInformations: CollectionConfig = {
     { name: 'topicName', type: 'text', required: true },
     { name: 'puzzleGameId', type: 'relationship', relationTo: 'puzzle-games' },
     { name: 'quizGameQuestionId', type: 'relationship', relationTo: 'quiz-game-questions' },
-    { name: 'treasureGameId', type: 'relationship', relationTo: 'treasure-games' },
+    { name: 'treasureCardId', type: 'relationship', relationTo: 'treasure-cards' },
     { name: 'wordGameId', type: 'relationship', relationTo: 'word-games' },
     { name: 'gameTypeId', type: 'relationship', relationTo: 'game-types' },
   ],
