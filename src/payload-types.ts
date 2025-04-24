@@ -536,21 +536,7 @@ export interface KnowledgePost {
   subject?: string | null;
   title?: string | null;
   image?: (number | null) | Media;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  content?: string | null;
   post_type: 'region' | 'province' | 'journey' | 'category';
   updatedAt: string;
   createdAt: string;
