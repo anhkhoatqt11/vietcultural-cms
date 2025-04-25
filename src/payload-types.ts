@@ -226,9 +226,14 @@ export interface Media {
 export interface Achievement {
   id: number;
   userId: number | User1;
+  regionId: number | Region;
   name: string;
   description: string;
-  stars: number;
+  history?: boolean | null;
+  intangible_heritage?: boolean | null;
+  tangible_heritage?: boolean | null;
+  stars?: number | null;
+  badge?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -255,6 +260,19 @@ export interface User1 {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions".
+ */
+export interface Region {
+  id: number;
+  regionName: string;
+  regionCode: string;
+  mediaUrl?: string | null;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -287,19 +305,6 @@ export interface PuzzleGame {
         id?: string | null;
       }[]
     | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "regions".
- */
-export interface Region {
-  id: number;
-  regionName: string;
-  regionCode: string;
-  mediaUrl?: string | null;
-  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -757,9 +762,14 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface AchievementsSelect<T extends boolean = true> {
   userId?: T;
+  regionId?: T;
   name?: T;
   description?: T;
+  history?: T;
+  intangible_heritage?: T;
+  tangible_heritage?: T;
   stars?: T;
+  badge?: T;
   updatedAt?: T;
   createdAt?: T;
 }
