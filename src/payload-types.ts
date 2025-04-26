@@ -411,8 +411,7 @@ export interface Comment {
   postId?: (number | null) | Post;
   userId?: (number | null) | User1;
   content?: string | null;
-  likes?: number | null;
-  dislikes?: number | null;
+  likedBy?: (number | User1)[] | null;
   parentId?: (number | null) | Comment;
   updatedAt: string;
   createdAt: string;
@@ -795,8 +794,7 @@ export interface CommentsSelect<T extends boolean = true> {
   postId?: T;
   userId?: T;
   content?: T;
-  likes?: T;
-  dislikes?: T;
+  likedBy?: T;
   parentId?: T;
   updatedAt?: T;
   createdAt?: T;
