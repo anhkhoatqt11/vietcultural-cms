@@ -35,6 +35,7 @@ import { KnowledgePost } from './collections/KnowledgePosts'
 import { PlayProcess } from './collections/PlayProcess'
 import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import { KnowledgeSections } from './collections/KnowledgeSections'
+import { Feedback } from './collections/FeedBack'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -73,6 +74,7 @@ export default buildConfig({
     KnowledgePost,
     PlayProcess,
     KnowledgeSections,
+    Feedback,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
