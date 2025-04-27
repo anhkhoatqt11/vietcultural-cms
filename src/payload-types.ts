@@ -93,6 +93,7 @@ export interface Config {
     user: User1;
     'knowledge-post': KnowledgePost;
     'play-process': PlayProcess;
+    'knowledge-section': KnowledgeSection;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -124,6 +125,7 @@ export interface Config {
     user: UserSelect<false> | UserSelect<true>;
     'knowledge-post': KnowledgePostSelect<false> | KnowledgePostSelect<true>;
     'play-process': PlayProcessSelect<false> | PlayProcessSelect<true>;
+    'knowledge-section': KnowledgeSectionSelect<false> | KnowledgeSectionSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -305,6 +307,7 @@ export interface PuzzleGame {
         id?: string | null;
       }[]
     | null;
+  answer_text?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -564,6 +567,23 @@ export interface PlayProcess {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-section".
+ */
+export interface KnowledgeSection {
+  id: number;
+  title?: string | null;
+  items?:
+    | {
+        name?: string | null;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -668,6 +688,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'play-process';
         value: number | PlayProcess;
+      } | null)
+    | ({
+        relationTo: 'knowledge-section';
+        value: number | KnowledgeSection;
       } | null);
   globalSlug?: string | null;
   user:
@@ -878,6 +902,7 @@ export interface PuzzleGamesSelect<T extends boolean = true> {
         index?: T;
         id?: T;
       };
+  answer_text?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1072,6 +1097,22 @@ export interface PlayProcessSelect<T extends boolean = true> {
   tangible_heritage?: T;
   stars?: T;
   badge?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-section_select".
+ */
+export interface KnowledgeSectionSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        name?: T;
+        image?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
