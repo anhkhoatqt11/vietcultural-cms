@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload'
 
 export const Feedback: CollectionConfig = {
-  slug: 'feedback',
+  slug: 'feedbacks',
   fields: [
     { name: 'userId', type: 'relationship', relationTo: 'user' },
     { name: 'title', type: 'text' },
