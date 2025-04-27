@@ -12,13 +12,14 @@ export const PuzzleGames: CollectionConfig = {
       type: 'upload',
       relationTo: 'media', // Change if your media collection slug is different
       required: true,
-    },    
+    },
     { name: 'answer', type: 'array', fields: [{ name: 'index', type: 'number' }] },
+    { name: 'answer_text', type: 'text' },
   ],
-  access:{
+  access: {
     read: () => true,
     create: () => true,
     update: () => true,
     delete: () => true,
-  }
+  },
 }
