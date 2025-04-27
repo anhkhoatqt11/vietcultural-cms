@@ -35,7 +35,7 @@ import { KnowledgePost } from './collections/KnowledgePosts'
 import { PlayProcess } from './collections/PlayProcess'
 import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import { KnowledgeSections } from './collections/KnowledgeSections'
-import { Feedback } from './collections/FeedBack'
+import { Feedback } from './collections/Feedback'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
