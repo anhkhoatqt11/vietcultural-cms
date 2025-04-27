@@ -16,6 +16,11 @@ export const Posts: CollectionConfig = {
       defaultValue: [],
     },
     {
+      name: 'imageUrl',
+      type: 'text',
+      required: false,
+    },
+    {
       name: 'image',
       type: 'upload',
       relationTo: 'media', // assumes you have a 'media' collection for uploads

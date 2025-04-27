@@ -430,6 +430,7 @@ export interface Post {
   question?: string | null;
   tags?: (number | Tag)[] | null;
   likedBy?: (number | User1)[] | null;
+  imageUrl?: string | null;
   image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
@@ -883,6 +884,7 @@ export interface PostsSelect<T extends boolean = true> {
   question?: T;
   tags?: T;
   likedBy?: T;
+  imageUrl?: T;
   image?: T;
   updatedAt?: T;
   createdAt?: T;

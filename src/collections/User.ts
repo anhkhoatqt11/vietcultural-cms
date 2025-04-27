@@ -28,7 +28,7 @@ export const User: CollectionConfig = {
       name: 'avatarUrl',
       type: 'text',
       required: false,
-      defaultValue: 'https://example.com/default-avatar.png',
+      defaultValue: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJF7sVh67zp0MmU1w8UaRV9j_vZ0v9-ecYA&s',
     },
     {
       name: 'dateOfBirth',
