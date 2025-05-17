@@ -95,6 +95,7 @@ export interface Config {
     'play-process': PlayProcess;
     'knowledge-section': KnowledgeSection;
     feedback: Feedback;
+    'game-history': GameHistory;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -128,6 +129,7 @@ export interface Config {
     'play-process': PlayProcessSelect<false> | PlayProcessSelect<true>;
     'knowledge-section': KnowledgeSectionSelect<false> | KnowledgeSectionSelect<true>;
     feedback: FeedbackSelect<false> | FeedbackSelect<true>;
+    'game-history': GameHistorySelect<false> | GameHistorySelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -601,6 +603,22 @@ export interface Feedback {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "game-history".
+ */
+export interface GameHistory {
+  id: number;
+  game_type_id?: (number | null) | GameType;
+  puzzle_game_id?: (number | null) | PuzzleGame;
+  quiz_game_id?: (number | null) | PuzzleGame;
+  treasure_game_id?: (number | null) | TreasureGame;
+  word_game_id?: (number | null) | WordGame;
+  started_time?: string | null;
+  completed_time?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -713,6 +731,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'feedback';
         value: number | Feedback;
+      } | null)
+    | ({
+        relationTo: 'game-history';
+        value: number | GameHistory;
       } | null);
   globalSlug?: string | null;
   user:
@@ -1148,6 +1170,21 @@ export interface FeedbackSelect<T extends boolean = true> {
   userId?: T;
   title?: T;
   content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "game-history_select".
+ */
+export interface GameHistorySelect<T extends boolean = true> {
+  game_type_id?: T;
+  puzzle_game_id?: T;
+  quiz_game_id?: T;
+  treasure_game_id?: T;
+  word_game_id?: T;
+  started_time?: T;
+  completed_time?: T;
   updatedAt?: T;
   createdAt?: T;
 }
