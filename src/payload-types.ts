@@ -255,6 +255,8 @@ export interface User1 {
   location?: string | null;
   gender?: ('Male' | 'Female' | 'Other') | null;
   isVerified?: boolean | null;
+  age_range: 'student' | 'non_student';
+  nationality: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1082,6 +1084,8 @@ export interface UserSelect<T extends boolean = true> {
   location?: T;
   gender?: T;
   isVerified?: T;
+  age_range?: T;
+  nationality?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

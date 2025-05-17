@@ -28,7 +28,8 @@ export const User: CollectionConfig = {
       name: 'avatarUrl',
       type: 'text',
       required: false,
-      defaultValue: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJF7sVh67zp0MmU1w8UaRV9j_vZ0v9-ecYA&s',
+      defaultValue:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJF7sVh67zp0MmU1w8UaRV9j_vZ0v9-ecYA&s',
     },
     {
       name: 'dateOfBirth',
@@ -51,11 +52,22 @@ export const User: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
     },
+    {
+      name: 'age_range',
+      type: 'select',
+      options: ['student', 'non_student'],
+      required: true,
+    },
+    {
+      name: 'nationality',
+      type: 'text',
+      required: true,
+    },
   ],
-  access:{
+  access: {
     read: () => true,
     create: () => true,
     update: () => true,
     delete: () => true,
-  }
+  },
 }
