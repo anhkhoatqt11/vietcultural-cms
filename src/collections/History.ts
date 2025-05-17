@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload'
 
-export const GameHistory: CollectionConfig = {
-  slug: 'game-history',
+export const History: CollectionConfig = {
+  slug: 'history',
   fields: [
     {
       name: 'game_type_id',
@@ -9,24 +9,18 @@ export const GameHistory: CollectionConfig = {
       relationTo: 'game-types',
     },
     {
-      name: 'puzzle_game_id',
+      name: 'user_id',
       type: 'relationship',
-      relationTo: 'puzzle-games',
+      relationTo: 'user',
     },
     {
-      name: 'quiz_game_id',
+      name: 'region_id',
       type: 'relationship',
-      relationTo: 'puzzle-games',
+      relationTo: 'regions',
     },
     {
-      name: 'treasure_game_id',
-      type: 'relationship',
-      relationTo: 'treasure-games',
-    },
-    {
-      name: 'word_game_id',
-      type: 'relationship',
-      relationTo: 'word-games',
+      name: 'description',
+      type: 'text',
     },
     {
       name: 'started_time',

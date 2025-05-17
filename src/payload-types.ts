@@ -95,7 +95,13 @@ export interface Config {
     'play-process': PlayProcess;
     'knowledge-section': KnowledgeSection;
     feedback: Feedback;
-    'game-history': GameHistory;
+    history: History;
+    test: Test;
+    'quiz-test': QuizTest;
+    'multiple-choice': MultipleChoice;
+    'scale-test': ScaleTest;
+    'image-question': ImageQuestion;
+    'text-question': TextQuestion;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -129,7 +135,13 @@ export interface Config {
     'play-process': PlayProcessSelect<false> | PlayProcessSelect<true>;
     'knowledge-section': KnowledgeSectionSelect<false> | KnowledgeSectionSelect<true>;
     feedback: FeedbackSelect<false> | FeedbackSelect<true>;
-    'game-history': GameHistorySelect<false> | GameHistorySelect<true>;
+    history: HistorySelect<false> | HistorySelect<true>;
+    test: TestSelect<false> | TestSelect<true>;
+    'quiz-test': QuizTestSelect<false> | QuizTestSelect<true>;
+    'multiple-choice': MultipleChoiceSelect<false> | MultipleChoiceSelect<true>;
+    'scale-test': ScaleTestSelect<false> | ScaleTestSelect<true>;
+    'image-question': ImageQuestionSelect<false> | ImageQuestionSelect<true>;
+    'text-question': TextQuestionSelect<false> | TextQuestionSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -603,17 +615,109 @@ export interface Feedback {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "game-history".
+ * via the `definition` "history".
  */
-export interface GameHistory {
+export interface History {
   id: number;
   game_type_id?: (number | null) | GameType;
-  puzzle_game_id?: (number | null) | PuzzleGame;
-  quiz_game_id?: (number | null) | PuzzleGame;
-  treasure_game_id?: (number | null) | TreasureGame;
-  word_game_id?: (number | null) | WordGame;
+  user_id?: (number | null) | User1;
+  region_id?: (number | null) | Region;
+  description?: string | null;
   started_time?: string | null;
   completed_time?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "test".
+ */
+export interface Test {
+  id: number;
+  test_type?: ('input_test' | 'output_test') | null;
+  user_id?: (number | null) | User1;
+  result?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quiz-test".
+ */
+export interface QuizTest {
+  id: number;
+  test_id?: (number | null) | Test;
+  question?: string | null;
+  optionA?: string | null;
+  optionB?: string | null;
+  optionC?: string | null;
+  optionD?: string | null;
+  audioUrl?: string | null;
+  correctAnswer?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "multiple-choice".
+ */
+export interface MultipleChoice {
+  id: number;
+  test_id?: (number | null) | Test;
+  question?: string | null;
+  optionA?: string | null;
+  optionB?: string | null;
+  optionC?: string | null;
+  optionD?: string | null;
+  otherOption?: string | null;
+  audioUrl?: string | null;
+  user_answer?:
+    | {
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scale-test".
+ */
+export interface ScaleTest {
+  id: number;
+  test_id?: (number | null) | Test;
+  question?: string | null;
+  options?: ('step1' | 'step2' | 'step3' | 'step4' | 'step5') | null;
+  user_answer?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "image-question".
+ */
+export interface ImageQuestion {
+  id: number;
+  test_id?: (number | null) | Test;
+  question?: string | null;
+  optionA?: (number | null) | Media;
+  optionB?: (number | null) | Media;
+  optionC?: (number | null) | Media;
+  optionD?: (number | null) | Media;
+  correctAnswer?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "text-question".
+ */
+export interface TextQuestion {
+  id: number;
+  test_id?: (number | null) | Test;
+  question?: string | null;
+  user_answer?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -733,8 +837,32 @@ export interface PayloadLockedDocument {
         value: number | Feedback;
       } | null)
     | ({
-        relationTo: 'game-history';
-        value: number | GameHistory;
+        relationTo: 'history';
+        value: number | History;
+      } | null)
+    | ({
+        relationTo: 'test';
+        value: number | Test;
+      } | null)
+    | ({
+        relationTo: 'quiz-test';
+        value: number | QuizTest;
+      } | null)
+    | ({
+        relationTo: 'multiple-choice';
+        value: number | MultipleChoice;
+      } | null)
+    | ({
+        relationTo: 'scale-test';
+        value: number | ScaleTest;
+      } | null)
+    | ({
+        relationTo: 'image-question';
+        value: number | ImageQuestion;
+      } | null)
+    | ({
+        relationTo: 'text-question';
+        value: number | TextQuestion;
       } | null);
   globalSlug?: string | null;
   user:
@@ -1175,16 +1303,102 @@ export interface FeedbackSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "game-history_select".
+ * via the `definition` "history_select".
  */
-export interface GameHistorySelect<T extends boolean = true> {
+export interface HistorySelect<T extends boolean = true> {
   game_type_id?: T;
-  puzzle_game_id?: T;
-  quiz_game_id?: T;
-  treasure_game_id?: T;
-  word_game_id?: T;
+  user_id?: T;
+  region_id?: T;
+  description?: T;
   started_time?: T;
   completed_time?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "test_select".
+ */
+export interface TestSelect<T extends boolean = true> {
+  test_type?: T;
+  user_id?: T;
+  result?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quiz-test_select".
+ */
+export interface QuizTestSelect<T extends boolean = true> {
+  test_id?: T;
+  question?: T;
+  optionA?: T;
+  optionB?: T;
+  optionC?: T;
+  optionD?: T;
+  audioUrl?: T;
+  correctAnswer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "multiple-choice_select".
+ */
+export interface MultipleChoiceSelect<T extends boolean = true> {
+  test_id?: T;
+  question?: T;
+  optionA?: T;
+  optionB?: T;
+  optionC?: T;
+  optionD?: T;
+  otherOption?: T;
+  audioUrl?: T;
+  user_answer?:
+    | T
+    | {
+        answer?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scale-test_select".
+ */
+export interface ScaleTestSelect<T extends boolean = true> {
+  test_id?: T;
+  question?: T;
+  options?: T;
+  user_answer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "image-question_select".
+ */
+export interface ImageQuestionSelect<T extends boolean = true> {
+  test_id?: T;
+  question?: T;
+  optionA?: T;
+  optionB?: T;
+  optionC?: T;
+  optionD?: T;
+  correctAnswer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "text-question_select".
+ */
+export interface TextQuestionSelect<T extends boolean = true> {
+  test_id?: T;
+  question?: T;
+  user_answer?: T;
   updatedAt?: T;
   createdAt?: T;
 }

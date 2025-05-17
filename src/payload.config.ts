@@ -36,8 +36,13 @@ import { PlayProcess } from './collections/PlayProcess'
 import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import { KnowledgeSections } from './collections/KnowledgeSections'
 import { Feedback } from './collections/Feedback'
-import { GameHistory } from './collections/GameHistory'
-
+import { History } from './collections/History'
+import { Test } from './collections/Test'
+import { QuizTest } from './collections/QuizTest'
+import { MultipleChoice } from './collections/MultpleChoice'
+import { ScaleTest } from './collections/ScaleTest'
+import { ImageQuestion } from './collections/ImageQuestion'
+import { TextQuestion } from './collections/TextQuestion'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -76,7 +81,13 @@ export default buildConfig({
     PlayProcess,
     KnowledgeSections,
     Feedback,
-    GameHistory,
+    History,
+    Test,
+    QuizTest,
+    MultipleChoice,
+    ScaleTest,
+    ImageQuestion,
+    TextQuestion,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
