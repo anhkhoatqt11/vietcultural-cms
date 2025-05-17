@@ -36,6 +36,7 @@ import { PlayProcess } from './collections/PlayProcess'
 import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import { KnowledgeSections } from './collections/KnowledgeSections'
 import { Feedback } from './collections/Feedback'
+import { GameHistory } from './collections/GameHistory'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -75,6 +76,7 @@ export default buildConfig({
     PlayProcess,
     KnowledgeSections,
     Feedback,
+    GameHistory,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
